@@ -4,7 +4,7 @@ require 'conexion.php';
 $Key_N = $_GET["Key_N"];
 //echo $Key_N;
 
-$sql = "SELECT Key_N, Nombre, num_pasaporte, Fecha_Rad_MJP FROM portugal WHERE Key_N = '$Key_N'";
+$sql = "SELECT Key_N, Nombre, num_pasaporte, Real_N, CRC_N, Password_MJP, Fecha_Rad_MJP FROM portugal WHERE Key_N = '$Key_N'";
 
 $resultado = $mysqli->query($sql);
 $row = $resultado->fetch_assoc();
@@ -26,22 +26,47 @@ $row = $resultado->fetch_assoc();
     <div class="container">
     <form action="update.php" method="POST">
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Key_N</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $row['Key_N']; ?>">
+            <label for="Key_N" class="form-label">Key_N</label>
+            <input type="text" class="form-control" id="Key_N" name="Key_N" readonly value="<?php echo $row['Key_N']; ?>">
             
         </div>
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $row['Nombre']; ?>">
+            <label for="Nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="Nombre" name="Nombre" readonly value="<?php echo $row['Nombre']; ?>">
             
         </div>
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label"># de pasaporte</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $row['num_pasaporte']; ?>">
+            <label for="num_pasaporte" class="form-label"># de pasaporte</label>
+            <input type="text" class="form-control" id="num_pasaporte" name="num_pasaporte" readonly value="<?php echo $row['num_pasaporte']; ?>">
             
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="mb-3">
+            <label for="Real_N" class="form-label">Real_N</label>
+            <input type="text" class="form-control" id="Real_N" name="Real_N"  value="<?php echo $row['Real_N']; ?>">
+            
+        </div>
+        <div class="mb-3">
+            <label for="CRC_N" class="form-label">CRC_N</label>
+            <input type="text" class="form-control" id="CRC_N" name="CRC_N"  value="<?php echo $row['CRC_N']; ?>">
+            
+        </div>
+        <div class="mb-3">
+            <label for="Password_MJP" class="form-label">Password_MJP</label>
+            <input type="text" class="form-control" id="Password_MJP" name="Password_MJP"  value="<?php echo $row['Password_MJP']; ?>">
+            
+        </div>
+        <div class="mb-3">
+            <label for="Fecha_Rad_MJP" class="form-label">Fecha_Rad_MJP</label>
+            <input type="date" class="form-control" id="Fecha_Rad_MJP" name="Fecha_Rad_MJP"  value="<?php echo $row['Fecha_Rad_MJP']; ?>">
+            
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
     </form>
     </div>
+    <br>
+    <div class="container">
+        <button type="button" class="btn btn-warning" > <a href="index.php">Retroceder</a></button>
+    </div>
+
 </body>
 </html>

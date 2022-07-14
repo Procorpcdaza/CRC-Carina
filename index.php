@@ -2,25 +2,6 @@
 
 require 'conexion.php';
 
-function contador($linea)
-{
-    require 'conexion.php';
-    $sql = "SELECT Fech_Act, count(*) AS contador FROM $linea 
-    GROUP BY Fech_Act 
-    HAVING COUNT(*)>1;";
-    $resultado = $mysqli->query($sql);
-    //$num = $resultado->num_rows;
-
-    while ($row = $resultado->fetch_assoc()) {
-
-        echo "<tr><th>" . $row['contador'] . "</th><td>" . $row['Fech_Act'] . "</td></tr>";
-    }
-}
-
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +17,12 @@ function contador($linea)
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+    <link href="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.css" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.js" type="text/javascript"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
@@ -49,11 +36,15 @@ function contador($linea)
                         <th>Key_N</th>
                         <th>Numero de pasaporte</th>
                         <th>Nombre</th>
+                        <th>Real_N</th>
+                        <th>CRC_N</th>
+                        <th>Password_MJP</th>
                         <th>Fecha_Rad_MJP</th>
+                        <th>Acciones</th>
                     </tr>
                     <?php
-                    require 'conexion.php';
-                    $sql = "SELECT Key_N, Nombre, num_pasaporte, Fecha_Rad_MJP FROM portugal";
+                    //require 'conexion.php';
+                    $sql = "SELECT Key_N, Nombre, num_pasaporte, Real_N, CRC_N, Password_MJP, Fecha_Rad_MJP FROM portugal";
                     $resultado = $mysqli->query($sql);
                     //$num = $resultado->num_rows;                
                     while ($row = $resultado->fetch_assoc()) {
@@ -62,6 +53,9 @@ function contador($linea)
                             <td><?php echo $row['Key_N']; ?></td>
                             <td><?php echo $row['num_pasaporte']; ?></td>
                             <td><?php echo $row['Nombre']; ?></td>
+                            <td><?php echo $row['Real_N']; ?></td>
+                            <td><?php echo $row['CRC_N']; ?></td>
+                            <td><?php echo $row['Password_MJP']; ?></td>
                             <td><?php echo $row['Fecha_Rad_MJP']; ?></td>                            
                             <td>
                                 <a href="editar.php?Key_N=<?php echo $row['Key_N'];?>">Editar</a>
@@ -77,5 +71,18 @@ function contador($linea)
     </div>
 
 </body>
+
+<script>
+
+    var tabla = document.querySelector("#dataTable");
+
+
+
+    var datatable = new DataTable(tabla,{
+        perPage:25,
+        perPageSelect:[5,10,15,25,50,100,1000]
+    });
+
+</script>
 
 </html>
