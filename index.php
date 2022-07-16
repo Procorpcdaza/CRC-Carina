@@ -5,8 +5,8 @@ require 'conexion.php';
 function XlsxToPhp_date($condicional){
     $Excel_DATE = $condicional;
     $UNIX_DATE = ($Excel_DATE - 25569) * 86400;
-    //echo gmdate("d-m-Y", $UNIX_DATE);
-    //echo Date("d/m/y", $UNIX_DATE);
+    echo gmdate("d-m-Y", $UNIX_DATE);
+    echo Date("d/m/y", $UNIX_DATE);
     return gmdate("d/m/Y", $UNIX_DATE);
 }
 
