@@ -2,14 +2,6 @@
 
 require 'conexion.php';
 
-function XlsxToPhp_date($condicional){
-    $Excel_DATE = $condicional;
-    $UNIX_DATE = ($Excel_DATE - 25569) * 86400;
-    //echo gmdate("d-m-Y", $UNIX_DATE);
-    //echo Date("d/m/y", $UNIX_DATE);
-    return gmdate("d/m/Y", $UNIX_DATE);
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -53,18 +45,16 @@ function XlsxToPhp_date($condicional){
                             <th>CRC_N</th>
                             <th>Password_MJP</th>
                             <th>Fecha_Rad_MJP</th>
-                            <th>pago_IRN</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
                     //require 'conexion.php';
-                    $sql = "SELECT Key_N, Nombre, num_pasaporte, Real_N, CRC_N, Password_MJP, Fecha_Rad_MJP, pago_IRN FROM portugal";
+                    $sql = "SELECT Key_N, Nombre, num_pasaporte, Real_N, CRC_N, Password_MJP, Fecha_Rad_MJP FROM portugal";
                     $resultado = $mysqli->query($sql);
                     //$num = $resultado->num_rows;                
                     while ($row = $resultado->fetch_assoc()) {
-
                     ?>
                     
                         <tr>
@@ -74,8 +64,7 @@ function XlsxToPhp_date($condicional){
                             <td><?php echo $row['Real_N']; ?></td>
                             <td><?php echo $row['CRC_N']; ?></td>
                             <td><?php echo $row['Password_MJP']; ?></td>
-                            <td><?php echo $row['Fecha_Rad_MJP']; ?></td>
-                            <td><?php echo $row['pago_IRN']; ?></td>
+                            <td><?php echo $row['Fecha_Rad_MJP']; ?></td>                            
                             <td>
                                 <a href="editar.php?Key_N=<?php echo $row['Key_N'];?>">Editar</a>
                             </td>
